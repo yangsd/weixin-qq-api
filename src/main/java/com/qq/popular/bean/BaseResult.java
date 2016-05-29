@@ -7,6 +7,7 @@ package com.qq.popular.bean;
  */
 public class BaseResult {
 
+
   private static final String SUCCESS_CODE = "0";
 
   private String errcode;
@@ -32,8 +33,8 @@ public class BaseResult {
     return errcode == null || errcode.isEmpty() || errcode.equals(SUCCESS_CODE);
   }
 
-  public void printErrInfo(){
-      System.out.println(String.format("errcode:%s , errmsg:%s ",this.errcode,this.errmsg));
+    public void printErrInfo(){
+    System.out.println(String.format("errcode:%s , errmsg:%s ",this.errcode,this.errmsg));
   }
 
 }

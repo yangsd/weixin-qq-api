@@ -5,8 +5,10 @@ package com.qq.popular.bean;
  * Created by fang on 2016/3/25.
  */
 public class AccessToken extends BaseResult {
-    private String access_token;
-    private int expire;
+
+    private String access_token;//获取到的凭证
+
+    private int expire;//凭证有效时间
 
     public int getExpire() {
         return expire;
