@@ -40,4 +40,35 @@ public class JsonResponseHandler{
 		}
 	}
 
+	/**
+	 *
+	 * @param clazz
+	 * @param chartset
+	 * @param <T>
+	 * @return
+	 */
+	public static <T> ResponseHandler<T> createResponseHandler(final Class<T> clazz,String chartset){
+
+		if(map.containsKey(clazz.getName())){
+			return (ResponseHandler<T>)map.get(clazz.getName());
+		}else{
+			ResponseHandler<T> responseHandler = new ResponseHandler<T>() {
+				@Override
+				public T handleResponse(HttpResponse response)
+						throws ClientProtocolException, IOException {
+					int status = response.getStatusLine().getStatusCode();
+					if (status >= 200 && status < 300) {
+						HttpEntity entity = response.getEntity();
+						String str = EntityUtils.toString(entity);
+						return JsonUtil.parseObject(new String(str.getBytes(chartset)), clazz);
+					} else {
+						throw new ClientProtocolException("Unexpected response status: " + status);
+					}
+				}
+			};
+			map.put(clazz.getName(), responseHandler);
+			return responseHandler;
+		}
+	}
+
 }

@@ -113,6 +113,18 @@ public class LocalHttpClient {
 	}
 
 	/**
+	 * 数据返回自动JSON对象解析(新增参数：字符编码)
+	 * @param request
+	 * @param clazz
+	 * @param chartset
+	 * @param <T>
+	 * @return
+	 */
+	public static <T> T executeJsonResult(HttpUriRequest request,Class<T> clazz,String chartset){
+		return execute(request,JsonResponseHandler.createResponseHandler(clazz,chartset));
+	}
+
+	/**
 	 * 数据返回自动XML对象解析
 	 * @param request
 	 * @param clazz
